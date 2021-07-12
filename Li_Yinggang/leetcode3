@@ -1,0 +1,49 @@
+package com.lyg.w20210712;
+
+/**
+ * 题目：一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。
+ */
+public class Job01 {
+    public static void main(String[] args) {
+
+        System.out.println(tick(4));
+        System.out.println(numWays(1));
+   
+    }
+
+    /**
+     * 迭代
+     * @param n
+     * @return
+     */
+    public static int tick(int n) {
+        if (n == 0 | n == 1) return 1;
+        int first = 1;
+        int sum = 1;
+        int sum1;
+        for (int i = 2; i <= n; i++) {
+            sum1 = sum;
+            sum += first;
+            sum = sum % 1000000007;
+            first = sum1;
+        }
+        return sum;
+    }
+
+    /**
+     * 递归
+     * @param n
+     * @return
+     */
+    public static int numWays(int n) {
+        int sum = 1;
+        if (n == 2) {
+            sum = 2;
+        }
+        if (n >= 2) {
+            sum = numWays(n - 1) + numWays(n - 2);
+        }
+        sum = sum % 1000000007;
+        return sum;
+    }
+}
